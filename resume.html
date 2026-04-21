@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>简历 · 数据分析实习生</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e6f0;
+    --text2: #9b99ab;
+    --text3: #5e5c70;
+    --accent: #7c6bff;
+    --accent2: #a99fff;
+    --accent-dim: rgba(124,107,255,0.12);
+    --teal: #00c9a7;
+    --teal-dim: rgba(0,201,167,0.1);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.1);
+    --red: #f87171;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Noto Sans SC', sans-serif;
+    --serif: 'DM Serif Display', serif;
+    --r: 10px;
+    --r2: 16px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 56px;
+    background: rgba(9,9,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text3);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 80px 0; }
+  section + section { border-top: 0.5px solid var(--border); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -120px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(124,107,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 0.5px solid rgba(124,107,255,0.3);
+    border-radius: 100px;
+    margin-bottom: 28px;
+    background: var(--accent-dim);
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text2);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+  .hero-contacts {
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .contact-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    border: 0.5px solid var(--border2);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--text2);
+    background: var(--bg2);
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+  .contact-chip:hover { border-color: var(--accent); color: var(--text); }
+  .contact-chip .icon { font-size: 14px; }
+
+  /* SECTION TITLES */
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .sec-title {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 36px;
+    line-height: 1.2;
+  }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--r2);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-card::after {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--accent), var(--teal));
+    border-radius: 2px;
+  }
+  .edu-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .edu-school {
+    font-size: 17px; font-weight: 500; color: #fff;
+  }
+  .edu-year {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+  .edu-major {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 6px;
+  }
+  .edu-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-family: var(--mono);
+    border-radius: 100px;
+    margin-right: 8px;
+    margin-bottom: 12px;
+  }
+  .badge-accent { background: var(--accent-dim); color: var(--accent2); border: 0.5px solid rgba(124,107,255,0.25); }
+  .badge-teal { background: var(--teal-dim); color: var(--teal); border: 0.5px solid rgba(0,201,167,0.25); }
+  .badge-amber { background: var(--amber-dim); color: var(--amber); border: 0.5px solid rgba(245,158,11,0.25); }
+  .edu-courses {
+    font-size: 13px;
+    color: var(--text3);
+    border-top: 0.5px solid var(--border);
+    padding-top: 14px;
+    margin-top: 8px;
+  }
+  .edu-courses strong { color: var(--text2); font-weight: 500; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .skill-group {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--r2);
+    padding: 20px 22px;
+    transition: border-color 0.25s;
+  }
+  .skill-group:hover { border-color: var(--border2); }
+  .skill-group-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 14px;
+  }
+  .skill-item {
+    margin-bottom: 11px;
+  }
+  .skill-item:last-child { margin-bottom: 0; }
+  .skill-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 5px;
+  }
+  .skill-name { font-size: 13px; color: var(--text); }
+  .skill-level {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+  .skill-bar {
+    height: 3px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fill-accent { background: linear-gradient(to right, var(--accent), var(--accent2)); }
+  .fill-teal { background: linear-gradient(to right, var(--teal), #00e5c9); }
+  .fill-amber { background: linear-gradient(to right, var(--amber), #fbbf24); }
+  .fill-red { background: linear-gradient(to right, var(--red), #fb923c); }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 20px; }
+  .project-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--r2);
+    overflow: hidden;
+    transition: border-color 0.25s;
+    cursor: pointer;
+  }
+  .project-card:hover { border-color: var(--border2); }
+  .project-card.open { border-color: rgba(124,107,255,0.3); }
+  .project-header {
+    padding: 24px 28px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px;
+  }
+  .project-meta { flex: 1; }
+  .project-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 6px;
+    letter-spacing: 0.06em;
+  }
+  .project-title {
+    font-size: 16px; font-weight: 500; color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 12px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+  .toggle-btn {
+    width: 32px; height: 32px; flex-shrink: 0;
+    border-radius: 50%;
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text3);
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;
+    padding-bottom: 1px;
+  }
+  .toggle-btn:hover { border-color: var(--accent); color: var(--accent2); }
+  .project-card.open .toggle-btn {
+    background: var(--accent-dim);
+    border-color: rgba(124,107,255,0.4);
+    color: var(--accent2);
+    transform: rotate(45deg);
+  }
+  .project-body {
+    display: none;
+    padding: 0 28px 24px;
+    border-top: 0.5px solid var(--border);
+  }
+  .project-card.open .project-body { display: block; }
+  .project-stats {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-chip {
+    display: flex; align-items: center; gap: 7px;
+    padding: 7px 14px;
+    border-radius: 100px;
+    border: 0.5px solid var(--border2);
+    background: var(--bg3);
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .stat-chip .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+  .highlights {
+    list-style: none;
+    margin-top: 4px;
+  }
+  .highlights li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 7px;
+  }
+  .highlights li::before {
+    content: '';
+    position: absolute; left: 0; top: 10px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+  .highlights li strong { color: var(--text); font-weight: 500; }
+  .sub-list {
+    list-style: none;
+    padding-left: 16px;
+    margin: 4px 0;
+  }
+  .sub-list li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 13px;
+    color: var(--text3);
+    line-height: 1.65;
+    margin-bottom: 3px;
+  }
+  .sub-list li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--text3);
+    opacity: 0.5;
+  }
+
+  /* ABOUT */
+  .about-box {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--r2);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-box::before {
+    content: '"';
+    position: absolute; right: 24px; top: -8px;
+    font-family: var(--serif);
+    font-size: 120px;
+    color: rgba(124,107,255,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .about-text {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.85;
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+  .about-text strong { color: var(--text); font-weight: 500; }
+  .about-chips {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 22px;
+  }
+  .about-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 0.5px solid var(--border2);
+    font-size: 12.5px;
+    color: var(--text2);
+    background: var(--bg3);
+  }
+  .about-chip .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 32px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up:nth-child(2) { transition-delay: 0.08s; }
+  .fade-up:nth-child(3) { transition-delay: 0.16s; }
+  .fade-up:nth-child(4) { transition-delay: 0.24s; }
+  .fade-up:nth-child(5) { transition-delay: 0.32s; }
+
+  /* SCROLL INDICATOR */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--teal));
+    z-index: 200;
+    transform-origin: left;
+    transition: width 0.1s linear;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .container { padding: 0 20px; }
+    .hero { padding: 100px 0 60px; }
+    .hero h1 { font-size: 36px; }
+    .edu-row { flex-direction: column; gap: 2px; }
+    .project-header { padding: 18px 20px; }
+    .project-body { padding: 0 20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProg"></div>
+
+<nav>
+  <span class="nav-logo">{ CV }</span>
+  <div class="nav-links">
+    <a href="#edu">教育</a>
+    <a href="#skills">技能</a>
+    <a href="#projects">项目</a>
+    <a href="#about">评价</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">求职意向 · 数据分析实习生</div>
+    <h1>数据驱动，<em>洞见</em><br>业务价值</h1>
+    <p class="hero-sub">财务管理 × 数据科学双学位 · 首都经济贸易大学<br>具备从数据清洗到可视化的全链路独立实践能力</p>
+    <div class="hero-contacts">
+      <a href="tel:XXX" class="contact-chip"><span class="icon">📞</span> XXX</a>
+      <a href="mailto:XXX" class="contact-chip"><span class="icon">✉</span> XXX</a>
+      <span class="contact-chip"><span class="icon">📍</span> 北京</span>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="edu">
+  <div class="container">
+    <div class="sec-label">Education</div>
+    <div class="sec-title">教育背景</div>
+    <div class="edu-card fade-up">
+      <div class="edu-row">
+        <div class="edu-school">首都经济贸易大学</div>
+        <div class="edu-year">20XX 届</div>
+      </div>
+      <div class="edu-major">财务管理（数据科学与大数据技术）双学位</div>
+      <span class="edu-badge badge-accent">GPA 4.11 / 5.0</span>
+      <span class="edu-badge badge-teal">All-English Program</span>
+      <span class="edu-badge badge-amber">双学位</span>
+      <div class="edu-courses">
+        <strong>主修课程：</strong>统计学 · 数据库原理 · 数据分析 · 财务管理 · 管理会计
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="sec-label">Skills</div>
+    <div class="sec-title">技能清单</div>
+    <div class="skills-grid">
+
+      <div class="skill-group fade-up">
+        <div class="skill-group-title">数据处理</div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Python · Pandas / NumPy</span>
+            <span class="skill-level">熟练</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-accent" data-w="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">SQL · MySQL</span>
+            <span class="skill-level">熟练</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-accent" data-w="85"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group fade-up">
+        <div class="skill-group-title">可视化</div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Power BI</span>
+            <span class="skill-level">熟练</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-teal" data-w="82"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Excel · 数据透视表</span>
+            <span class="skill-level">熟练</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-teal" data-w="80"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group fade-up">
+        <div class="skill-group-title">分析方法</div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">用户行为分析</span>
+            <span class="skill-level">有经验</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-amber" data-w="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">关联规则挖掘</span>
+            <span class="skill-level">有经验</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-amber" data-w="72"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">杜邦财务分析</span>
+            <span class="skill-level">有经验</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-amber" data-w="75"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group fade-up">
+        <div class="skill-group-title">语言能力</div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">中文</span>
+            <span class="skill-level">母语</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-red" data-w="100"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">英语</span>
+            <span class="skill-level">全英文专业</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-red" data-w="78"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-label">Projects</div>
+    <div class="sec-title">项目经历</div>
+    <div class="projects-list">
+
+      <!-- PROJECT 1 -->
+      <div class="project-card fade-up" onclick="toggleCard(this)">
+        <div class="project-header">
+          <div class="project-meta">
+            <div class="project-number">PROJECT 01 · 个人综合项目</div>
+            <div class="project-title">电商用户行为全链路数据分析</div>
+            <div class="project-desc">基于 Kaggle Amazon 真实电商数据集，完整覆盖数据提取、清洗、分析、可视化全流程</div>
+            <div class="project-tags">
+              <span class="tag badge-accent">Python</span>
+              <span class="tag badge-accent">SQL</span>
+              <span class="tag badge-teal">Power BI</span>
+              <span class="tag badge-amber">RFM分析</span>
+              <span class="tag badge-amber">关联规则</span>
+            </div>
+          </div>
+          <button class="toggle-btn" aria-label="展开/收起">+</button>
+        </div>
+        <div class="project-body">
+          <div class="project-stats">
+            <div class="stat-chip"><div class="dot" style="background:var(--accent)"></div>6,600 万条记录</div>
+            <div class="stat-chip"><div class="dot" style="background:var(--teal)"></div>8.8 GB 数据集</div>
+            <div class="stat-chip"><div class="dot" style="background:var(--amber)"></div>Kaggle · Amazon 2020</div>
+          </div>
+          <ul class="highlights">
+            <li>使用 <strong>SQL 多表 JOIN</strong> 整合用户、订单、商品三表数据，完成核心业务字段提取</li>
+            <li>使用 <strong>Python Pandas</strong> 完成大规模数据清洗：缺失值填充、异常值剔除、字段标准化</li>
+            <li>构建核心业务指标：
+              <ul class="sub-list">
+                <li>转化率漏斗（浏览 → 加购 → 购买）</li>
+                <li>用户留存率（Cohort 分析）</li>
+                <li>客单价与复购率</li>
+              </ul>
+            </li>
+            <li>多维用户与商品分析：
+              <ul class="sub-list">
+                <li>基于 RFM 维度的用户分群（消费频次 × 金额）</li>
+                <li>商品关联规则挖掘，计算 Support / Confidence / Lift</li>
+                <li>漏斗分析定位关键转化流失环节</li>
+              </ul>
+            </li>
+            <li>使用 <strong>Power BI</strong> 搭建多页可视化看板，覆盖用户、商品、转化三大分析模块</li>
+            <li>排查并修复数据维度缺失导致的<strong>模型关联失效</strong>问题，重新设计数据结构</li>
+            <li><strong>结论输出：</strong>识别核心流失节点，提出商品推荐策略与用户转化路径优化方向</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-card fade-up" onclick="toggleCard(this)">
+        <div class="project-header">
+          <div class="project-meta">
+            <div class="project-number">PROJECT 02 · 挑战杯项目 · 学院一等奖</div>
+            <div class="project-title">大学生对 AI 情感依赖研究</div>
+            <div class="project-desc">担任数据分析负责人，独立完成 350 份问卷的全流程数据处理与统计分析</div>
+            <div class="project-tags">
+              <span class="tag badge-accent">Python</span>
+              <span class="tag badge-teal">Excel</span>
+              <span class="tag badge-amber">描述统计</span>
+              <span class="tag badge-amber">分组分析</span>
+            </div>
+          </div>
+          <button class="toggle-btn" aria-label="展开/收起">+</button>
+        </div>
+        <div class="project-body">
+          <div class="project-stats">
+            <div class="stat-chip"><div class="dot" style="background:var(--accent)"></div>350 份有效问卷</div>
+            <div class="stat-chip"><div class="dot" style="background:var(--teal)"></div>数据分析负责人</div>
+            <div class="stat-chip"><div class="dot" style="background:var(--amber)"></div>学院一等奖</div>
+          </div>
+          <ul class="highlights">
+            <li>独立负责问卷数据全流程处理：收集、清洗（异常值剔除、样本筛选）与结构化整理</li>
+            <li>使用 <strong>Excel / Python</strong> 进行统计分析与分组对比：
+              <ul class="sub-list">
+                <li>不同性别、年级群体的 AI 使用频率差异分析</li>
+                <li>情感依赖程度与使用行为之间的相关性分析</li>
+                <li>使用场景分布（学习 / 情感交流 / 娱乐）结构拆解</li>
+              </ul>
+            </li>
+            <li><strong>关键洞察：</strong>识别高依赖用户特征，发现情感依赖强度与使用频次的正相关趋势</li>
+            <li>将分析结论转化为研究报告并参与最终展示，<strong>项目获学院一等奖</strong></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="sec-label">About</div>
+    <div class="sec-title">自我评价</div>
+    <div class="about-box fade-up">
+      <p class="about-text">
+        <strong>财务管理 × 数据科学双学位</strong>背景，具备从数据提取、清洗到分析、可视化的<strong>全链路独立实践能力</strong>。有过亿级数据集（6,600 万条）实操经验，熟悉电商用户行为分析方法论。全英文授课培养了较强<strong>英文阅读与文档理解能力</strong>。对互联网产品数据分析方向有浓厚兴趣，希望在实习中将分析能力应用于真实业务场景。
+      </p>
+      <div class="about-chips">
+        <span class="about-chip"><span class="dot" style="background:var(--accent)"></span>全链路数据能力</span>
+        <span class="about-chip"><span class="dot" style="background:var(--teal)"></span>亿级数据集经验</span>
+        <span class="about-chip"><span class="dot" style="background:var(--amber)"></span>财务 + 数科双背景</span>
+        <span class="about-chip"><span class="dot" style="background:var(--red)"></span>全英文专业授课</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>RESUME · DATA ANALYSIS INTERN · CUEB</span>
+</footer>
+
+<script>
+  // Toggle project cards
+  function toggleCard(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.project-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  // Scroll progress bar
+  const prog = document.getElementById('scrollProg');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    prog.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  // Intersection observer: fade-up + skill bars
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Trigger skill bars within this element
+        entry.target.querySelectorAll('.skill-fill[data-w]').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, 100);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Also trigger any skill bars that are already visible
+  setTimeout(() => {
+    document.querySelectorAll('.skill-fill[data-w]').forEach(bar => {
+      const rect = bar.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        bar.style.width = bar.dataset.w + '%';
+      }
+    });
+  }, 300);
+</script>
+</body>
+</html>
